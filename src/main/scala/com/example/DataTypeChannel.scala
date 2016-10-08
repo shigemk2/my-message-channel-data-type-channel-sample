@@ -1,6 +1,6 @@
 package com.example
 
-import akka.actor.ActorSystem
+import akka.actor.{Actor, ActorSystem}
 
 class CompletableApp(val steps:Int) extends App {
   val canComplete = new java.util.concurrent.CountDownLatch(1);
@@ -31,6 +31,41 @@ class CompletableApp(val steps:Int) extends App {
   def completedStep() = completion.countDown()
 }
 
+abstract class RabbitMQReceiver extends Actor
+
 object DataTypeChannel {
 
+}
+
+class ProductQueriesChannel extends RabbitMQReceiver {
+  def receive = {
+    case message: Array[Byte] =>
+      val productQuery = translateToProductQuery(message)
+  }
+
+  def translateToProductQuery(message: Array[Byte]) = {
+    null
+  }
+}
+
+class PriceQuoteChannel extends RabbitMQReceiver {
+  def receive = {
+    case message: Array[Byte] =>
+      val priceQuote = translateToPriceQuote(message)
+  }
+
+  def translateToPriceQuote(message: Array[Byte]) = {
+    null
+  }
+}
+
+class PurchaseOrderChannel extends RabbitMQReceiver {
+  def receive = {
+    case message: Array[Byte] =>
+      val purchaseOrder = translateToPurchaseOrder(message)
+  }
+
+  def translateToPurchaseOrder(message: Array[Byte]) = {
+    null
+  }
 }

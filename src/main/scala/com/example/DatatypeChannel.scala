@@ -33,7 +33,7 @@ class CompletableApp(val steps:Int) extends App {
 
 abstract class RabbitMQReceiver extends Actor
 
-object DataTypeChannel {
+object DatatypeChannel {
 
 }
 
